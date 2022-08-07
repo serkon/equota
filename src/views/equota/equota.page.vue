@@ -13,7 +13,8 @@
           <div class="eq-stock-list list">
             <eq-modal v-model:show="showModal"></eq-modal>
             <div v-if="loading" class="loading">Loading, please wait...</div>
-            <eq-stock-list v-model="myStockList" v-if="!loading"></eq-stock-list>
+            <div v-if="!loading && myStockList.length <= 0" class="loading">Please add stock to your dashboard</div>
+            <eq-stock-list v-model="myStockList" v-if="!loading && myStockList.length > 0"></eq-stock-list>
           </div>
         </div>
         <div class="eq-chart col-md-6">
