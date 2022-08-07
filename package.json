@@ -12,7 +12,7 @@
     "fix": "npx eslint -c ./.eslintrc.js src --ext .js,.jsx,.json,.ts,.tsx,.vue --fix",
     "style": "stylelint \"src/**/*.scss\" --cache --cache-location .cache/.stylelintcache --fix",
     "prehusky": "rm -rf .husky && husky install",
-    "husky": "npx husky add .husky/pre-push 'ng test --watch=false --code-coverage --browsers=ChromeHeadless' && npx husky add .husky/commit-msg 'npx commitlint --edit $1'",
+    "husky": "npx husky add .husky/pre-push 'npm run test:unit --watch=false --code-coverage --browsers=ChromeHeadless' && npx husky add .husky/commit-msg 'npx commitlint --edit $1'",
     "postinstall": "npm run husky"
   },
   "dependencies": {

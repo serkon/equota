@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-ng test --watch=false --code-coverage --browsers=ChromeHeadless
+npm run test:unit --watch=false --code-coverage --browsers=ChromeHeadless
