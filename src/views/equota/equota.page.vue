@@ -12,7 +12,8 @@
           </div>
           <div class="eq-stock-list list">
             <eq-modal v-model:show="showModal"></eq-modal>
-            <eq-stock-list v-model="myStockList"></eq-stock-list>
+            <div v-if="loading" class="loading">Loading, please wait...</div>
+            <eq-stock-list v-model="myStockList" v-if="!loading"></eq-stock-list>
           </div>
         </div>
         <div class="eq-chart col-md-6">
@@ -35,6 +36,7 @@
 
   interface Data {
     showModal: Ref<boolean>;
+    loading: boolean;
   }
   export default defineComponent({
     name: 'dx-equota',
@@ -46,6 +48,7 @@
     data(): Data {
       return {
         showModal: ref(false),
+        loading: false,
       };
     },
     props: {},
@@ -74,12 +77,10 @@
       },
     },
     created() {
-      console.log('created');
       this.initilize();
     },
     methods: {
       initilize(): void {
-        console.log('initialize');
         this.getStocks();
         window.setInterval(() => {
           this.getStocks();
@@ -87,12 +88,14 @@
         }, 1000 * 60 * 20);
       },
       async getStocks(): Promise<void> {
+        this.loading = true;
         const response: AxiosResponse<Stock[]> = await instance.get(`${process.env.VUE_APP_STOCK}`);
         if (response.status === 200) {
           this.$store.commit('setStocksMutation', response.data);
         } else {
-          console.log('You entered wrong password');
+          console.log('There are some problems with the server');
         }
+        this.loading = false;
       },
       addToMyStock(item: Stock): void {
         this.$store.commit('addToMyStock', item);
@@ -126,6 +129,14 @@
         width: 100%;
         border: 1px dashed #e4e4e4;
         border-radius: 4px;
+      }
+
+      .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        min-height: 120px;
       }
     }
 
