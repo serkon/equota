@@ -1,0 +1,21 @@
+html,
+body {
+  display: block;
+  height: 100vh;
+}
+
+body {
+  position: relative;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+a {
+  text-decoration: none;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}

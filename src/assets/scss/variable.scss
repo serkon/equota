@@ -1,0 +1,21 @@
+:root {
+  --font-family: "Roboto", sans-serif;
+  --font-size: 1em;
+  --logo-background: rgb(255 255 255 / 0%);
+}
+
+.drawer {
+  --nav-item-height: 2rem;
+  --drawer-left-background: var(--bs-brand);
+
+  .drawer-left {
+    --nav-item-color: #afa5d9;
+    --nav-item-color-active: var(--bs-light);
+    --nav-item-color-hover: var(--bs-light);
+  }
+
+  .drawer-top {
+    --drawer-top-height: 3rem;
+    --nav-item-height: 3rem;
+  }
+}

@@ -1,0 +1,33 @@
+@use "sass:color";
+@use "sass:list";
+
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "@/assets/scss/theme";
+@import "@/assets/scss/variable";
+@import "@/assets/scss/global";
+@import "~bootstrap/scss/bootstrap";
+
+:root {
+  @mixin s($name, $color) {
+    $percentages: (80%, 60%, 40%, 20%, 0, -20%, -40%, -60%, -80%);
+
+    @each $percentage in $percentages {
+      $i: list.index($percentages, $percentage);
+      $variation: $color;
+
+      @if $percentage > 0 {
+        $variation: color.mix(white, $color, $percentage);
+      } @else if $percentage < 0 {
+        $variation: color.mix(black, $color, $percentage * -1);
+      }
+
+      --bs-#{$name}-#{$i * 100}: #{$variation};
+    }
+  }
+
+  @each $name, $value in $colors {
+    @include s($name, $value);
+  }
+}
